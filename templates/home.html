@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Digital India: Your Gateway to Education, Notifications, Exams, Tourism, and More | digitalindia | digitalindia.xyz{% endblock %}
+
+
+{% block meta_description %}<meta name="description" content="Explore a diverse range of content on Digital India, your ultimate destination for education updates, exam notifications, travel guides, tourism insights, entertainment news, and a plethora of services. Stay informed, entertained, and connected with the latest happenings and resources from all corners of India.">{% endblock %}
+{% block content %}
+
+
+<div class="w3-content" style="max-width:1600px">
+    <br>
+    <div class="w3-container">
+<!-- Latest Education Posts -->
+<div>
+    <h2 class=" w3-padding w3-card-3 w3-margin w3-light-blue">Latest Posts</h2>
+    {% for post in education_posts %}
+    <a href="{% url 'post_detail' post.slug %}" style="text-decoration: none;">
+    <div  class=" w3-padding w3-white w3-card-3 w3-margin">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.category }} - {{ post.subcategory }}</p>
+        <p>{{ post.content| safe | truncatechars:300 }}</p>
+        <a href="{% url 'post_detail' post.slug %}" style="text-decoration: none;"> <button class="w3-button w3-black">Read More</button></a>
+       
+    </div>
+</a>
+    {% endfor %}
+</div>
+
+<!-- Random Education Posts -->
+<div>
+    <h2 class=" w3-padding w3-card-3 w3-margin w3-blue">Random Posts</h2>
+    {% for post in random_posts %}
+    <a href="{% url 'post_detail' post.slug %}" style="text-decoration: none;">
+        <div  class=" w3-padding w3-white w3-card-3 w3-margin">
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.category }} - {{ post.subcategory }}</p>
+            <p>{{ post.content| safe | truncatechars:300 }}</p>
+            <a href="{% url 'post_detail' post.slug %}" style="text-decoration: none;"> <button class="w3-button w3-black">Read More</button></a>
+           
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+</div></div>
+    <!-- Add more details as needed -->
+{% endblock %}

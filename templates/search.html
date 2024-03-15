@@ -1,0 +1,203 @@
+<!-- search_results.html -->
+{% extends 'base.html' %}
+{% block content %}
+
+
+<body class="w3-theme-l5">
+
+
+
+<!-- Page Container -->
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+  <!-- The Grid -->
+  <div class="w3-row">
+    <!-- Left Column -->
+    <div class="w3-col m3">
+      <!-- Profile -->
+      <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+         <h4 class="w3-center">Categories</h4>
+         <hr>
+         {% for category in categories %}
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ category.name }}</p>
+            {% empty %}
+              <p>No categories found.</p>
+            {% endfor %}
+          
+         
+        </div>
+      </div>
+      <br>
+
+      <!-- sub categories -->
+      <div class="w3-card w3-round w3-white">
+        <div class="w3-container">
+         <h4 class="w3-center">Sub Categories</h4>
+         <hr>
+         {% for subcategory in subcategories %}
+         <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> {{ subcategory.name }}</p>
+            {% empty %}
+              <p>No categories found.</p>
+            {% endfor %}
+          
+         
+        </div>
+      </div>
+      <br>
+      
+     
+      
+     
+      
+    
+    <!-- End Left Column -->
+    </div>
+    
+    <!-- Middle Column -->
+    <div class="w3-col m7">
+    
+      <div class="w3-row-padding">
+    <div class="w3-col m12">
+        <div class="w3-card w3-round w3-white">
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-round w3-white w3-margin">
+                        
+                            <input id="search-input2" class="w3-input w3-white" type="text" placeholder="Search.." aria-label="Search">
+                       
+                        <button id="search-button2" class="w3-button w3-black w3-margin">Search</button>
+                        
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
+
+      
+      
+      {% for post in education_posts %}
+      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
+        
+        <span class="w3-right w3-opacity">updated</span>
+     
+            
+          
+            
+        
+        <h4><a href="{% url 'post_detail' post_slug=post.slug %}">{{ post.title }}</a></h4>
+        <hr class="w3-clear">
+        {{ post.content | safe | truncatechars_html:300}}   
+        <a href="{% url 'post_detail' post_slug=post.slug %}"><button type="button" class="w3-button w3-theme-d2 w3-margin-bottom w3-right">Read more &nbsp; <i class="fa fa-arrow-right"></i> </button> </a>
+      </div>  
+      {% empty %}
+      <li>No posts found.</li>
+    {% endfor %}
+      
+      
+    <!-- End Middle Column -->
+    </div>
+    
+    <!-- Right Column -->
+    <div class="w3-col m2">
+      <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container">
+          <p>Tags</p>
+          {% for tag in tags %}
+          <p><strong>{{ tag.name }}</strong></p>
+          {% empty %}
+          <p><strong>No tags found</strong></p>
+  {% endfor %}
+         
+        </div>
+      </div>
+      <br>
+      
+      <div class="w3-card w3-round w3-white w3-center">
+        <div class="w3-container">
+          <p>Friend Request</p>
+          
+          <span>Jane Doe</span>
+          <div class="w3-row w3-opacity">
+            <div class="w3-half">
+              <button class="w3-button w3-block w3-green w3-section" title="Accept"><i class="fa fa-check"></i></button>
+            </div>
+            <div class="w3-half">
+              <button class="w3-button w3-block w3-red w3-section" title="Decline"><i class="fa fa-remove"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      
+      <div class="w3-card w3-round w3-white w3-padding-16 w3-center">
+        <p>ADS</p>
+      </div>
+      <br>
+      
+      <div class="w3-card w3-round w3-white w3-padding-32 w3-center">
+        <p><i class="fa fa-bug w3-xxlarge"></i></p>
+      </div>
+      
+    <!-- End Right Column -->
+    </div>
+    
+  <!-- End Grid -->
+  </div>
+  
+<!-- End Page Container -->
+</div>
+<br>
+
+<script>
+    document.getElementById("search-button2").addEventListener("click", function() {
+        var query = document.getElementById("search-input2").value.trim();
+        if (query !== "") {
+            window.location.href = "{% url 'search' %}?query=" + encodeURIComponent(query);
+        }
+    });
+</script>
+
+<!-- <h2>Search Results for "{{ query }}"</h2>
+
+
+
+<h3>Posts</h3>
+<ul>
+  {% for post in education_posts %}
+    <li>{{ post.title }}</li>
+  {% empty %}
+    <li>No posts found.</li>
+  {% endfor %}
+</ul>
+
+<h3>Categories</h3>
+<ul>
+  {% for category in categories %}
+    <li>{{ category.name }}</li>
+  {% empty %}
+    <li>No categories found.</li>
+  {% endfor %}
+</ul>
+
+<h3>Subcategories</h3>
+<ul>
+  {% for subcategory in subcategories %}
+    <li>{{ subcategory.name }}</li>
+  {% empty %}
+    <li>No subcategories found.</li>
+  {% endfor %}
+</ul>
+
+<h3>Tags</h3>
+<ul>
+  {% for tag in tags %}
+    <li>{{ tag.name }}</li>
+  {% empty %}
+    <li>No tags found.</li>
+  {% endfor %}
+</ul>
+{% endblock %} -->

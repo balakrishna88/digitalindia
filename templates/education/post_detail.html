@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ post.title }} - {{ post.category }} - {{ post.subcategory }} | digitalindia {% endblock %}
+{% block meta_description %}<meta name="description" content="{{ post.title }} - {{ post.category }} - {{ post.subcategory }}">{% endblock %}
+{% block content %}
+
+
+  
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1600px">
+  <!-- Grid -->
+  <div class="w3-row w3-padding w3-border">
+
+    <!-- Blog entries -->
+    <div class="w3-col l8 s12">
+    
+      <!-- Blog entry -->
+     
+      <div class="w3-container w3-white w3-margin w3-padding-large">
+        <div class="w3-center">
+          <h3>{{ post.title }}</h3>
+          <h5  class="w3-left-align">{{ post.category }} - {{ post.subcategory }}   <span class="w3-opacity w3-right">{{ post.created_at|date:"F d, Y" }} - {{ post.user.username }}</span></h5>
+        </div>
+<hr>
+        <div class="w3-justify">
+          {{ post.content | safe }}
+        </div>
+      </div>
+      <hr>
+    
+
+    <!-- END BLOG ENTRIES -->
+    </div>
+
+    <!-- About/Information menu -->
+    <div class="w3-col l4">
+        <!-- About Card -->
+        <!-- Posts -->
+        <div class="w3-white w3-margin">
+          <div class="w3-container w3-padding w3-black">
+            <h4>Random Posts</h4>
+          </div>
+          <ul class="w3-ul w3-hoverable w3-white">
+            {% for post in popular_posts %}
+            <li class="w3-padding-16">
+              <span class="w3-large"><a href="{% url 'post_detail' post.slug %}" style="color: rgb(24, 130, 117); text-decoration: none;">{{ post.title |slice:":40" }}</a></span>
+              <br>
+              <span>{{ post.category }} / {{ post.subcategory }}</span>
+            </li>
+            {% empty %}
+          <p>No popular posts available.</p>
+            {% endfor %}
+          </ul>
+        </div>
+        <hr>
+  
+        <!-- Category -->
+        <div class="w3-white w3-margin">
+          <div class="w3-container w3-padding w3-black">
+              <h4>Categories</h4>
+          </div>
+          <div class="w3-container w3-white">
+              <p>
+                  {% for cat in category %}
+                      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">
+                          <a href="{% url 'category_detail' category_name=cat.name %}" style="text-decoration: none;">{{ cat.name }}</a>
+                      </span> 
+                  {% endfor %}
+              </p>
+          </div>
+      </div>
+      <hr>
+
+         <!-- Sub category -->
+        {% include 'includes/subcategory.html' %}
+
+
+        
+         <!-- Tags -->
+         {% include 'includes/tags.html' %}
+
+        
+  
+       <!--Social follow-->
+        {% include 'includes/social.html' %}
+        
+        <hr>
+  
+      <!-- END About/Intro Menu -->
+      </div>
+  
+    <!-- END GRID -->
+    </div>
+  
+  <!-- END w3-content -->
+  </div>
+  
+  <!-- Subscribe Modal -->
+  <div id="subscribe" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content" style="padding:32px">
+      <div class="w3-container w3-white">
+        <i onclick="document.getElementById('subscribe').style.display='none'" class="fa fa-remove w3-transparent w3-button w3-xlarge w3-right"></i>
+        <h2 class="w3-wide">SUBSCRIBE</h2>
+        <p>Join my mailing list to receive updates on the latest blog posts and other things.</p>
+        <p><input class="w3-input w3-border" type="text" placeholder="Enter e-mail"></p>
+        <button type="button" class="w3-button w3-block w3-padding-large w3-red w3-margin-bottom" onclick="document.getElementById('subscribe').style.display='none'">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+  {% endblock %}
+
+   
+ 
+
+    
+    

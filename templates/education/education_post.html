@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Education Post</title>
+    {{ form.media }}  <!-- Include CKEditor media files -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">  <!-- Include w3.css -->
+    <style>
+        /* Center align the title */
+        
+        /* Style for form labels and select elements */
+        label {
+            display: block;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        /* Style for CKEditor content */
+      
+        /* Style for submit button */
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 6px 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        /* Style for button on hover */
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* Style for Summernote editor container */
+        .note-editor {
+            width: 100%; /* Adjust width as needed */
+            min-height: 300px; /* Adjust height as needed */
+        }
+        /* Style for responsive container */
+        
+        /* Style for form */
+        .form {
+            width: 80%;
+            max-width: 600px; /* Set maximum width */
+        }
+    </style>
+</head>
+<body>
+    <b>Education Post</b>
+  
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post" class="w3-container">
+        {% csrf_token %}
+        <div class="w3-row">
+            <div class="w3-half">
+                <!-- Category dropdown -->
+                <label for="id_category">Category:</label>
+                <select id="id_category" name="category" required class="w3-select w3-border">
+                    <option value="">Select category</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="w3-half">
+                <!-- Subcategory dropdown -->
+                <label for="id_subcategory">Subcategory:</label>
+                <select id="id_subcategory" name="subcategory" required class="w3-select w3-border">
+                    <option value="">Select subcategory</option>
+                    {% for subcategory in subcategories %}
+                        <option value="{{ subcategory.id }}" data-category="{{ subcategory.category.id }}">{{ subcategory.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        
+        <!-- Title field -->
+        <label for="id_title">Title:</label>
+        <input type="text" id="id_title" name="title" required class="w3-input w3-border">
+        
+        <!-- CKEditor for the content field -->
+        <label for="id_content">Content:</label>
+        {{ form.content }}
+        
+        <!-- Submit button -->
+        <button type="submit" class="w3-button w3-green w3-margin-top">Submit</button>
+    </form>
+
+    <!-- JavaScript to show/hide subcategories -->
+    <script>
+        // Get the category and subcategory dropdown elements
+        var categoryDropdown = document.getElementById('id_category');
+        var subcategoryDropdown = document.getElementById('id_subcategory');
+
+        // Function to show/hide subcategories based on the selected category
+        function updateSubcategories() {
+            var categoryId = categoryDropdown.value;
+
+            // Loop through subcategory options
+            var subcategoryOptions = subcategoryDropdown.querySelectorAll('option');
+            subcategoryOptions.forEach(function(option) {
+                // Show only subcategories related to the selected category
+                if (option.getAttribute('data-category') == categoryId || categoryId === '') {
+                    option.style.display = 'block';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+        }
+
+        // Add event listener to category dropdown
+        categoryDropdown.addEventListener('change', updateSubcategories);
+
+        // Initially update subcategories based on the selected category
+        updateSubcategories();
+    </script>
+</body>
+</html>

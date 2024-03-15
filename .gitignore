@@ -1,0 +1,14 @@
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Ignore Django migration files
+*/__pycache__/
+*.pyc
+
+
+# Ignore IDE and editor files
+.vscode/
+.idea/
+*.sublime-*

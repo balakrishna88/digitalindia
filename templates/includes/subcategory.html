@@ -1,0 +1,14 @@
+<div class="w3-white w3-margin">
+          <div class="w3-container w3-padding w3-black">
+            <h4>Sub Categories</h4>
+          </div>
+          <div class="w3-container w3-white">
+            <p>
+              {% for subcategory in subcategory %}
+              <span class="w3-tag w3-light-grey w3-small w3-margin-bottom"><a href="{% url 'subcategory_detail' category_name=subcategory.category.name subcategory_name=subcategory.name %}" style="text-decoration: none;">{{ subcategory.name }}</a></span> 
+              {% endfor %}
+            </p>
+          </div>
+        </div>
+        <hr>
+

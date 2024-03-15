@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Posts</title>
+</head>
+<body>
+    <h1>Random Posts</h1>
+
+    <!-- Display popular posts -->
+    <ul>
+        {% for post in education_posts %}
+    <div>
+        <h2><a href="{% url 'post_detail' post.slug %}">{{ post.title }}</a></h2>
+        <p> {{ post.category }} / {{ post.subcategory }}</p>
+        <!-- Add other details of the post as needed -->
+    </div>
+{% empty %}
+    <p>No popular posts available.</p>
+{% endfor %}
+
+    </ul>
+
+    <!-- Optional: Display links to categories or subcategories -->
+
+    <!-- Example: Display links to categories -->
+    <h2>Categories</h2>
+    <ul>
+        {% for category in categories %}
+            <li><a href="#">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <!-- Example: Display links to subcategories -->
+    <h2>Subcategories</h2>
+    <ul>
+        {% for subcategory in subcategories %}
+            <li><a href="#">{{ subcategory.name }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

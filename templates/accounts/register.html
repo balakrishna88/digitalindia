@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <title>Glassmorphism login Form Tutorial in html css</title>
+ 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    <style media="screen">
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #080710;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+        .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        }
+        .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .shape:first-child {
+            background: linear-gradient(
+                #1845ad,
+                #23a2f6
+            );
+            left: -80px;
+            top: -80px;
+        }
+        .shape:last-child {
+            background: linear-gradient(
+                to right,
+                #ff512f,
+                #f09819
+            );
+            right: -30px;
+            bottom: -80px;
+        }
+        form {
+            display: none; /* Initially hide the form */
+            height: 620px;
+            width: 600px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 50px 35px;
+        }
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.07);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+        ::placeholder {
+            color: #e5e5e5;
+        }
+        button {
+            width: 150px; /* Adjust button width as desired */
+            height: 50px; /* Adjust button height as desired */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #080710;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #fea4a4;
+        }
+        .social {
+            margin-top: 30px;
+            display: flex;
+        }
+        .social div {
+            background: red;
+            width: 150px;
+            border-radius: 3px;
+            padding: 5px 10px 10px 5px;
+            background-color: rgba(255, 255, 255, 0.27);
+            color: #eaf0fb;
+            text-align: center;
+        }
+        .social div:hover {
+            background-color: rgba(255, 255, 255, 0.47);
+        }
+        .social .fb {
+            margin-left: 25px;
+        }
+        .social i {
+            margin-right: 4px;
+        }
+        .message {
+            text-align: center;
+            margin-top: 300px;
+            font-size: 24px;
+        }
+        .code-input {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+     <!-- Display message -->
+    <div class="message">This service is temporarily closed. Thank you for your interest.</div>
+
+    <!-- Input code button -->
+    
+    <button onclick="enterCode()">Have Code</button>
+
+    <form method="post" id="registrationForm">
+        {% csrf_token %}
+        <h3>Register Here</h3>
+    
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 48%;">
+                <label for="first_name">First Name</label>
+                <input type="text" placeholder="First Name" id="first_name" name="first_name" required>
+            </div>
+            <div style="width: 48%;">
+                <label for="last_name">Last Name</label>
+                <input type="text" placeholder="Last Name" id="last_name" name="last_name" required>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 48%;">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Email or Phone" id="email" name="email" required>
+            </div>
+            <div style="width: 48%;">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" placeholder="Phone Number" id="phone_number" name="phone_number" required>
+            </div>
+        </div>
+    
+        <div style="display: flex; justify-content: space-between;">
+            <div style="width: 48%;">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" id="password" name="password" required>
+            </div>
+            <div style="width: 48%;">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" placeholder="Confirm Password" id="confirm_password" name="confirm_password" required onkeyup="checkPasswordMatch();">
+                <div id="passwordError"></div> <!-- This div will display the error message -->
+            </div>
+        </div>
+    
+        <button type="submit">Register</button><br><br>
+
+        <div style="display: flex; justify-content: space-between;">
+            <b><a href="{% url 'login' %}" style="text-decoration: none;">Login</a></b>
+            <span>|</span>
+            <b><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></b>
+        </div>
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+            <div>{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if form.email.errors %}
+            <div class="error">{{ form.email.errors }}</div>
+        {% endif %}
+        {% if form.phone_number.errors %}
+            <div class="error">{{ form.phone_number.errors }}</div>
+        {% endif %}
+    </form>
+    
+    <script>
+        function enterCode() {
+            var code = prompt("Enter the 5-digit code:");
+            if (code === "165414") { // Check if the entered code matches
+                document.getElementById("registrationForm").style.display = "block"; // Display the registration form
+                document.querySelector(".message").style.display = "none"; // Hide the message
+                document.querySelector(".code-input").style.display = "none"; // Hide the code input button
+            } else {
+                alert("Invalid code. Please try again.");
+            }
+        }
+
+        function checkPasswordMatch() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirm_password").value;
+            var passwordError = document.getElementById("passwordError");
+    
+            if (password !== confirmPassword) {
+                passwordError.innerHTML = "Passwords do not match!";
+                passwordError.style.color = "red";
+            } else {
+                passwordError.innerHTML = "";
+            }
+        }
+    </script>
+</body>
+</html>

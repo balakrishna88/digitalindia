@@ -1,0 +1,19 @@
+<div class="w3-white w3-margin">
+    <div class="w3-container w3-padding w3-black">
+      <h4>Random Posts</h4>
+    </div>
+    <ul class="w3-ul w3-hoverable w3-white">
+      {% for post in popular_posts %}
+      <li class="w3-padding-16">
+        <span class="w3-large"><a href="{% url 'post_detail' post.slug %}" style="color: rgb(24, 130, 117); text-decoration: none;">{{ post.title |slice:":40" }}</a></span>
+        <br>
+        <span>{{ post.category }} / {{ post.subcategory }}</span>
+      </li>
+      {% empty %}
+    <p>No popular posts available.</p>
+      {% endfor %}
+    </ul>
+  </div>
+  <hr>
+  
+ 

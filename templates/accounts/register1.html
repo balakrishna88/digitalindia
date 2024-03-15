@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<body>
+
+<div class="w3-container">
+  <h2>W3.CSS Login Modal</h2>
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
+
+  {% if messages %}
+  <div>
+      {% for message in messages %}
+      <div>{{ message }}</div>
+      {% endfor %}
+  </div>
+  {% endif %}
+  {% if form.email.errors %}
+<div class="error">{{ form.email.errors }}</div>
+{% endif %}
+{% if form.phone_number.errors %}
+<div class="error">{{ form.phone_number.errors }}</div>
+{% endif %}
+
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+        <img src="https://www.w3schools.com/w3css/img_avatar4.png" alt="Avatar" style="width:20%" class="w3-circle w3-margin-top">
+      </div>
+      
+      <div style="padding: 20px;"> <!-- Add padding to this div -->
+        <form method="post">
+            {% csrf_token %}
+            <h3>Register Here</h3>
+        
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <label for="first_name">First Name</label><br>
+                    <input type="text" placeholder="First Name" id="first_name" name="first_name" required>
+                </div>
+                <div style="width: 48%;">
+                    <label for="last_name">Last Name</label><br>
+                    <input type="text" placeholder="Last Name" id="last_name" name="last_name" required>
+                </div>
+            </div>
+            <br>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <label for="email">Email</label><br>
+            <input type="email" placeholder="Email or Phone" id="email" name="email" required>
+                </div>
+                <div style="width: 48%;">
+                    <label for="phone_number">Phone Number</label><br>
+                    <input type="text" placeholder="Phone Number" id="phone_number" name="phone_number" required>
+                </div>
+            </div>
+        
+            <br>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="width: 48%;">
+                    <label for="password">Password</label><br>
+                    <input type="password" placeholder="Password" id="password" name="password" required>
+                </div>
+                <div style="width: 48%;">
+                    <label for="confirm_password">Confirm Password</label><br>
+                    <input type="password" placeholder="Confirm Password" id="confirm_password" name="confirm_password" required onkeyup="checkPasswordMatch();">
+                    <div id="passwordMatchMessage" style="color: red;"></div>
+                </div>
+            </div>
+            
+        
+          
+            <br>
+        
+            <button type="submit" id="registerBtn" disabled>Register</button><br><br>
+    
+            <!-- <div style="display: flex; justify-content: space-between;">
+                <b><a href="{% url 'login' %}" style="text-decoration: none;">Login</a></b>
+                <span>|</span>
+                <b><a href="{% url 'home' %}" style="text-decoration: none;">Home</a></b>
+            </div> -->
+         
+        </form>
+      </div>
+
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+        <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+    function checkPasswordMatch() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+        var registerBtn = document.getElementById("registerBtn");
+
+        if (password != confirmPassword) {
+            document.getElementById("passwordMatchMessage").innerHTML = "Passwords do not match!";
+            registerBtn.disabled = true;
+        } else {
+            document.getElementById("passwordMatchMessage").innerHTML = "";
+            registerBtn.disabled = false;
+        }
+    }
+</script>
+            
+</body>
+</html>
